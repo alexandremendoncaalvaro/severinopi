@@ -57,7 +57,7 @@ So, it´s not absolutely necessary, but I strongly recommend that you use an ext
 
 ### Raspbian
 
->:computer: on your computer
+![rasp](readme_images/pc.png)  
 Use Raspberry Pi Imager for an easy way to install Raspbian and other operating systems to an SD card ready to use with your Raspberry Pi:
 
 * [Raspberry Pi Imager for Windows](https://downloads.raspberrypi.org/imager/imager.exe)
@@ -68,8 +68,9 @@ Connect an SD card reader with the SD card inside.
 Open Raspberry Pi Imager and choose the required OS from the list presented.  
 Choose the SD card you wish to write your image to.  
 Review your selections and click 'WRITE' to begin writing data to the SD card.  
->Note: if using the Raspberry Pi Imager on Windows 10 with Controlled Folder Access enabled, you will need to explicitly allow the Raspberry Pi Imager permission to write the SD card. If this is not done, the Raspberry Pi Imager will fail with a "failed to write" error.  
+>Note: if using the Raspberry Pi Imager on Windows 10 with Controlled Folder Access enabled, you will need to explicitly allow the Raspberry Pi Imager permission to write the SD card. If this is not done, the Raspberry Pi Imager will fail with a "failed to write" error.
 
+![rasp](readme_images/rasp.png)  
 Connect the Raspberry Pi to the monitor using the HDMI cable.
 Insert the SD card into the Raspberry Pi and power it up with the micro-USB input.
 If you need to manually log in, the default user name is **pi**, with password **raspberry**. Remember the default keyboard layout is set to UK.
