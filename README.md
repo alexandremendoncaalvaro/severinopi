@@ -24,11 +24,14 @@ So.. Don´t worry, be happy!
 
 * Raspberry Pi 3B+ or above
 * Compatible class 10 [SD Card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with 16GB or above
-* Raspberry Pi Camera or USB Webcam
+* Raspberry Pi Camera Module or USB Webcam
 * Raspberry Pi LCD Screen (optional)
 * Raspberry Pi official font or USB Charger (at least 3A current) and USB Type-A to micro-USB cable (the most common found on smartphones)
 * Monitor *
 * HDMI cable *
+* Solenoid Door lock
+* 5V Relay module
+* 12VDC Power source
 
 >*At least for the configuration process
 
@@ -50,14 +53,17 @@ So, it´s not absolutely necessary, but I strongly recommend that you use an ext
 
 * Windows, Linux or Mac OS
 * Supported [SSH Client](https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client)
-* [VSCode](https://code.visualstudio.com/download)
+* [VS Code](https://code.visualstudio.com/download)
   * The fantastic plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
 ## Install
 
+On Raspberry Pi connect only the camera (Module or USB Webcam).  
+![rasp camera](https://projects-static.raspberrypi.org/projects/getting-started-with-picamera/eb7defb950e2f3eeb8aa5934d26cfd600860c8a0/en/images/connect-camera.gif)
+
 ### Raspbian
 
-![rasp](readme_images/pc.png)  
+![pc](readme_images/pc.png)  
 Use Raspberry Pi Imager for an easy way to install Raspbian and other operating systems to an SD card ready to use with your Raspberry Pi:
 
 * [Raspberry Pi Imager for Windows](https://downloads.raspberrypi.org/imager/imager.exe)
@@ -71,10 +77,10 @@ Review your selections and click 'WRITE' to begin writing data to the SD card.
 >Note: if using the Raspberry Pi Imager on Windows 10 with Controlled Folder Access enabled, you will need to explicitly allow the Raspberry Pi Imager permission to write the SD card. If this is not done, the Raspberry Pi Imager will fail with a "failed to write" error.
 
 ![rasp](readme_images/rasp.png)  
-Connect the Raspberry Pi to the monitor using the HDMI cable.
-Insert the SD card into the Raspberry Pi and power it up with the micro-USB input.
-If you need to manually log in, the default user name is **pi**, with password **raspberry**. Remember the default keyboard layout is set to UK.
-You should change the default password straight away to ensure your Raspberry Pi is secure.
+Connect the Raspberry Pi to the monitor using the HDMI cable.  
+Insert the SD card into the Raspberry Pi and power it up with the micro-USB input.  
+If you need to manually log in, the default user name is **pi**, with password **raspberry**. Remember the default keyboard layout is set to UK.  
+You should change the default password straight away to ensure your Raspberry Pi is secure.  
 Follow the steps on the screen to configure Raspberry Pi for the first use.  
 It´s important to configure Wifi or Ethernet in the same network of your computer.
 
@@ -82,9 +88,22 @@ It´s important to configure Wifi or Ethernet in the same network of your comput
 
 #### Remote controll with SSH
 
-On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration. Click on Interfaces and set SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.  
+On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
+Click on Interfaces and set SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
+
+![menu](https://projects-static.raspberrypi.org/projects/getting-started-with-picamera/eb7defb950e2f3eeb8aa5934d26cfd600860c8a0/en/images/pi-configuration-menu.png)
 ![SSH](https://images.ctfassets.net/tvfg2m04ppj4/4owZNQS99yKFHzxClG7PnA/aa405e22555866c62395c1d6daa4f7b8/SSH.jpg?w=800)
 >more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)
+
+*If you are using Raspberry Pi Camera, enable it too.
+
+Press Ctrl + Shift + T to open the Terminal and use the command bellow to check Raspberry Pi IP address:
+
+```bash
+ip a
+```
+
+>Take note of this address.
 
 Now you can do everything from your computer command line interface!
 
@@ -96,7 +115,52 @@ scp file.txt remote_username@10.10.0.2:/remote/directory
 
 ### Integrated Development Enviroment (IDE)
 
+![pc](readme_images/pc.png)  
 Please check carefully and install the [Computer Software recomended requirements](#computer-software) above.
+
+#### In VS Code
+
+Open a new terminal and verify you can connect to the SSH host by running the following command replacing IP address as appropriate:
+
+```bash
+ssh pi@192.168.0.42
+```
+
+Select Remote-SSH: Connect to Host... from the Command Palette (F1) and use the same pi@ipaddress as in last step.
+
+![ssh-user@box](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-user@box.png)
+
+After a moment, VS Code will connect to the SSH server and set itself up.  
+After you are connected, you'll be in an empty window. You can always refer to the Status bar to see which host you are connected to.
+
+![ssh-statusbar](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-statusbar.png)
+
+You can then open any folder or workspace on the remote machine using File > Open... or File > Open Workspace... just as you would locally!
+
+![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
+
+Open the VS Code Terminal and run each following command:
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+```bash
+sudo apt install git build-essential cmake python3 python3-pip libzbar-dev libzbar0 python3-dev python3-setuptools pipenv
+```
+
+```bash
+git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi && cd ~/severinopi
+```
+
+```bash
+pipenv install && pipenv shell
+```
+
+>Pipenv is a tool that aims to bring the best of all packaging worlds (bundler, composer, npm, cargo, yarn, etc.) to the Python world. It automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from your Pipfile as you install/uninstall packages. It also generates the ever-important Pipfile.lock, which is used to produce deterministic builds.  
+To know more access: https://github.com/pypa/pipenv
+
+
 
 ## Are you a native english speaker?
 
