@@ -59,7 +59,7 @@ So, it´s not absolutely necessary, but I strongly recommend that you use an ext
 ## Install
 
 On Raspberry Pi connect only the camera (Module or USB Webcam).  
-![rasp camera](https://projects-static.raspberrypi.org/projects/getting-started-with-picamera/eb7defb950e2f3eeb8aa5934d26cfd600860c8a0/en/images/connect-camera.gif)
+![rasp camera](readme_images/connect-camera.gif)
 
 ### Raspbian
 
