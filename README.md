@@ -24,16 +24,17 @@ So.. Don´t worry, be happy!
 
 * Raspberry Pi 3B+ or above
 * Compatible class 10 [SD Card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with 16GB or above
-* Raspberry Pi Camera Module or USB Webcam
+* Raspberry Pi Camera Module ¹
 * Raspberry Pi LCD Screen (optional)
 * Raspberry Pi official font or USB Charger (at least 3A current) and USB Type-A to micro-USB cable (the most common found on smartphones)
-* Monitor *
-* HDMI cable *
+* Monitor ²
+* HDMI cable ²
 * Solenoid Door lock
 * 5V Relay module
 * 12VDC Power source
 
->*At least for the configuration process
+>¹Unlike USB webcam, the Camera module is connected directly to the GPU  
+²At least for the configuration process
 
 ### Raspberry Pi software
 
@@ -58,7 +59,7 @@ So, it´s not absolutely necessary, but I strongly recommend that you use an ext
 
 ## Install
 
-On Raspberry Pi connect only the camera (Module or USB Webcam).  
+On Raspberry Pi connect only the camera module.  
 ![rasp camera](readme_images/connect-camera.gif)
 
 ### Raspbian
@@ -84,18 +85,16 @@ You should change the default password straight away to ensure your Raspberry Pi
 Follow the steps on the screen to configure Raspberry Pi for the first use.  
 It´s important to configure Wifi or Ethernet in the same network of your computer.
 
->Alternative: Install using NOOBS by follow this [video tutorial](https://www.youtube.com/watch?v=jsi50bCo_W4)
+>Alternative: Install using NOOBS by following this [video tutorial](https://www.youtube.com/watch?v=jsi50bCo_W4)
 
-#### Remote controll with SSH
+#### Remote control with SSH and Raspberry Pi Camera Enable
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
-Click on Interfaces and set SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
+Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
 
 ![menu](https://projects-static.raspberrypi.org/projects/getting-started-with-picamera/eb7defb950e2f3eeb8aa5934d26cfd600860c8a0/en/images/pi-configuration-menu.png)
-![SSH](https://images.ctfassets.net/tvfg2m04ppj4/4owZNQS99yKFHzxClG7PnA/aa405e22555866c62395c1d6daa4f7b8/SSH.jpg?w=800)
+![SSH](readme_images/ssh.jpg)
 >more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)
-
-*If you are using Raspberry Pi Camera, enable it too.
 
 Press Ctrl + Shift + T to open the Terminal and use the command bellow to check Raspberry Pi IP address:
 
@@ -146,7 +145,11 @@ sudo apt update && sudo apt upgrade
 ```
 
 ```bash
-sudo apt install git build-essential cmake python3 python3-pip libzbar-dev libzbar0 python3-dev python3-setuptools pipenv
+sudo apt install git build-essential cmake python3 python3-pip libopenblas-dev liblapack-dev libatlas-base-dev libzbar-dev libzbar0 python3-dev python3-setuptools pipenv
+```
+
+```bash
+git clone https://github.com/davisking/dlib.git ~/dlib && cd ~/dlib && python setup.py install --yes USE_NEON_INSTRUCTIONS
 ```
 
 ```bash
