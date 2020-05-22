@@ -40,8 +40,6 @@ So.. Don´t worry, be happy!
 
 * Raspbian Buster or above
 * Python 3.6 or above
-* Pipenv
-* Cmake
 
 ### Do I need an extra computer or just the Raspberry Pi?
 
@@ -92,7 +90,7 @@ It´s important to configure Wifi or Ethernet in the same network of your comput
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
 Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
 
-![menu](https://projects-static.raspberrypi.org/projects/getting-started-with-picamera/eb7defb950e2f3eeb8aa5934d26cfd600860c8a0/en/images/pi-configuration-menu.png)
+![menu](readme_images/pi-configuration-menu.png)
 ![SSH](readme_images/ssh.jpg)
 >more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)
 
@@ -102,14 +100,18 @@ Press Ctrl + Shift + T to open the Terminal and use the command bellow to check 
 ip a
 ```
 
->Take note of this address.
+In my case its connected by Wifi, and returns:
+
+![SSH](readme_images/ip.jpg)
+
+>Take note of the address of your connected interface.
 
 Now you can do everything from your computer command line interface!
 
-> Extra tip: You can tranfer files using the SCP command like this example ([more details here](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files)):  
+> Extra tip: You can tranfer files using the SCP command like this example, replacing parameters as appropriate ([more details here](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files)):  
 
 ```bash
-scp file.txt remote_username@10.10.0.2:/remote/directory
+scp file.txt pi@192.168.0.42:/remote/directory
 ```
 
 ### Integrated Development Enviroment (IDE)
@@ -146,10 +148,6 @@ sudo apt update && sudo apt upgrade
 
 ```bash
 sudo apt install git build-essential cmake python3 python3-pip libopenblas-dev liblapack-dev libatlas-base-dev libzbar-dev libzbar0 python3-dev python3-setuptools pipenv
-```
-
-```bash
-git clone https://github.com/davisking/dlib.git ~/dlib && cd ~/dlib && python setup.py install --yes USE_NEON_INSTRUCTIONS
 ```
 
 ```bash
