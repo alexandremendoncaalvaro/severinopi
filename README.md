@@ -39,9 +39,9 @@ So.. Don´t worry, be happy!
 ### Raspberry Pi software
 
 * Raspbian Buster or above
-* Python 3.6 or above
+* Python 3.7 or above
 
-### Do I need an extra computer or just the Raspberry Pi?
+### Do I need an extra computer?
 
 Short answer: Yes, you will do.  
 First, to configure Raspbian in Raspberry Pi.  
@@ -50,14 +50,20 @@ So, it´s not absolutely necessary, but I strongly recommend that you use an ext
 
 ### Computer Software
 
-* Windows, Linux or Mac OS
+Tested on Windows 10, Ubuntu 20.04 LTS and MacOS X Mojave.
+
 * Supported [SSH Client](https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client)
 * [VS Code](https://code.visualstudio.com/download)
   * The fantastic plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+* MacOS
+  * [XQuartz](https://www.xquartz.org/)
+* Windows
+  * [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+  * [Xming](http://www.straightrunning.com/XmingNotes/#head-121) (get Xming or Xming-x64)
 
 ## Install
 
-On Raspberry Pi connect only the camera module.  
+To start, on Raspberry Pi connect only the camera module.  
 ![rasp camera](readme_images/connect-camera.gif)
 
 ### Raspbian
@@ -85,7 +91,7 @@ It´s important to configure Wifi or Ethernet in the same network of your comput
 
 >Alternative: Install using NOOBS by following this [video tutorial](https://www.youtube.com/watch?v=jsi50bCo_W4)
 
-#### Remote control with SSH and Raspberry Pi Camera Enable
+#### Enable Raspberry Pi Features
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
 Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
@@ -100,34 +106,60 @@ Press Ctrl + Shift + T to open the Terminal and use the command bellow to check 
 ip a
 ```
 
-In my case its connected by Wifi, and returns:
+In my case it´s connected by Wifi, and returns:
 
 ![SSH](readme_images/ip.jpg)
 
 >Take note of the address of your connected interface.
 
-Now you can do everything from your computer command line interface!
+### Remote Control
 
-> Extra tip: You can tranfer files using the SCP command like this example, replacing parameters as appropriate ([more details here](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files)):  
+You have a lot of options to control your Raspberry Pi remotely, like simple [VNC access](https://www.raspberrypi.org/documentation/remote-access/vnc/).  
+But all of your environment features need to be installed on Raspberry Pi, and it's expend a lot of resources of Raspberry Pi.  
+
+Let's keep all enviroment features at your computer and only install the resources to run the application on your Raspberry Pi.
+
+### Integrated Development Enviroment (IDE)
+
+![pc](readme_images/pc.png)  
+>Please check carefully and install all the [Computer Software recomended requirements](#computer-software).
+
+#### Recommended Terminal
+
+The [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) does not currently enable X11 forwarding in VSCode Terminal witch is necessary to see graphical resources on your computer. (see [issue #267](https://github.com/microsoft/vscode-remote-release/issues/267)).  
+So we are going to use recommended terminal and X11 Forwarding app for each Operational System:
+
+* Linux: Only System Terminal (Raspberry Pi uses Linux too, so the integration is easier)
+* MacOS: System Terminal with XQuartz
+* Windows: Putty and XMing
+  * Putty configuration:  
+  ![SSH](readme_images/putty-session.jpg) ![SSH](readme_images/putty-x11.jpg)
+
+#### SSH Connection
+
+> Remember to run the X11 Forwarding Server In Windows (Xming) and MacOS (XQuartz) before connect.
+
+Open the [recommended terminal](#recommended-terminal) and verify you can connect to the SSH host by running the following command replacing IP address as appropriate:
+
+Linux and MacOS:
+
+```bash
+ssh -X pi@192.168.0.42
+```
+
+> In Windows open connection with Putty
+
+#### File Transfer
+
+You can tranfer files using the SCP command like this example, replacing parameters as appropriate ([more details here](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files)):  
 
 ```bash
 scp file.txt pi@192.168.0.42:/remote/directory
 ```
 
-### Integrated Development Enviroment (IDE)
+> In Windows you can use this nice graphical application too: [WinSCP](https://winscp.net/eng/docs/guide_install)
 
-![pc](readme_images/pc.png)  
-Please check carefully and install the [Computer Software recomended requirements](#computer-software) above.
-
-#### In VS Code
-
-Open a new terminal and verify you can connect to the SSH host by running the following command replacing IP address as appropriate:
-
-```bash
-ssh pi@192.168.0.42
-```
-
-Select Remote-SSH: Connect to Host... from the Command Palette (F1) and use the same pi@ipaddress as in last step.
+In VS Code select Remote-SSH: Connect to Host... from the Command Palette (F1) and use the same pi@ipaddress as in last step.
 
 ![ssh-user@box](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-user@box.png)
 
@@ -140,7 +172,7 @@ You can then open any folder or workspace on the remote machine using File > Ope
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
 
-Open the VS Code Terminal and run each following command:
+In terminal (connected to Raspberry Pi by SSH) run each following command:
 
 ```bash
 sudo apt update && sudo apt upgrade
