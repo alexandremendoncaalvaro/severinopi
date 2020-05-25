@@ -2,7 +2,7 @@
 
 ![Severino Pi](readme_images/severinopi.jpg)
 
-Easy setup access control with face recognition for Raspberry Pi.
+Access control with face recognition for Raspberry Pi.
 
 * MIT License
 * LGPDP Brasil Safe (Lei Geral de Proteção de Dados Pessoais)
@@ -44,7 +44,7 @@ So.. Don´t worry, be happy!
 ### Do I need an extra computer?
 
 Short answer: Yes, you will do.  
-First, to configure Raspbian in Raspberry Pi.  
+First, to configure the SDCard to Raspberry Pi and the first configuration of Raspbian.  
 After that, you will install your hardware in some infrastructure and it's a terrible idea to remove it every time to do configuration changes.
 So, it´s not absolutely necessary, but I strongly recommend that you use an extra computer to handle Raspberry Pi remotely.
 
@@ -58,8 +58,7 @@ Tested on Windows 10, Ubuntu 20.04 LTS and MacOS X Mojave.
 * MacOS
   * [XQuartz](https://www.xquartz.org/)
 * Windows
-  * [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-  * [Xming](http://www.straightrunning.com/XmingNotes/#head-121) (get Xming or Xming-x64)
+  * [MobaxTerm](https://mobaxterm.mobatek.net/)
 
 ## Install
 
@@ -76,7 +75,7 @@ Use Raspberry Pi Imager for an easy way to install Raspbian and other operating 
 * [Raspberry Pi Imager for Ubuntu](https://downloads.raspberrypi.org/imager/imager_amd64.deb)
 
 Connect an SD card reader with the SD card inside.  
-Open Raspberry Pi Imager and choose the required OS from the list presented.  
+Open Raspberry Pi Imager and choose Raspibian(recomended) from the OS list presented.  
 Choose the SD card you wish to write your image to.  
 Review your selections and click 'WRITE' to begin writing data to the SD card.  
 >Note: if using the Raspberry Pi Imager on Windows 10 with Controlled Folder Access enabled, you will need to explicitly allow the Raspberry Pi Imager permission to write the SD card. If this is not done, the Raspberry Pi Imager will fail with a "failed to write" error.
@@ -131,23 +130,17 @@ So we are going to use recommended terminal and X11 Forwarding app for each Oper
 
 * Linux: Only System Terminal (Raspberry Pi uses Linux too, so the integration is easier)
 * MacOS: System Terminal with XQuartz
-* Windows: Putty and XMing
-  * Putty configuration:  
-  ![SSH](readme_images/putty-session.jpg) ![SSH](readme_images/putty-x11.jpg)
+* Windows: MobaXterm (Very powerfull and easy)
 
 #### SSH Connection
 
-> Remember to run the X11 Forwarding Server In Windows (Xming) and MacOS (XQuartz) before connect.
+> Remember to run the X11 Forwarding Server In MacOS (XQuartz) before connect.
 
 Open the [recommended terminal](#recommended-terminal) and verify you can connect to the SSH host by running the following command replacing IP address as appropriate:
-
-Linux and MacOS:
 
 ```bash
 ssh -X pi@192.168.0.42
 ```
-
-> In Windows open connection with Putty
 
 #### File Transfer
 
@@ -157,7 +150,7 @@ You can tranfer files using the SCP command like this example, replacing paramet
 scp file.txt pi@192.168.0.42:/remote/directory
 ```
 
-> In Windows you can use this nice graphical application too: [WinSCP](https://winscp.net/eng/docs/guide_install)
+> In Windows you can use MobaXterm
 
 In VS Code select Remote-SSH: Connect to Host... from the Command Palette (F1) and use the same pi@ipaddress as in last step.
 
@@ -172,23 +165,25 @@ You can then open any folder or workspace on the remote machine using File > Ope
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
 
-In terminal (connected to Raspberry Pi by SSH) run each following command:
-
-```bash
-sudo apt update && sudo apt upgrade
-```
-
-```bash
-sudo apt install git build-essential cmake python3 python3-pip libopenblas-dev liblapack-dev libatlas-base-dev libzbar-dev libzbar0 python3-dev python3-setuptools pipenv
-```
+In terminal (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
 
 ```bash
 git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi && cd ~/severinopi
 ```
 
 ```bash
+sudo apt update && sudo apt upgrade
+```
+
+```bash
+sudo apt install pipenv
+```
+
+```bash
 pipenv install && pipenv shell
 ```
+
+*Get a coffee, take a walk... It´ll take a while
 
 >Pipenv is a tool that aims to bring the best of all packaging worlds (bundler, composer, npm, cargo, yarn, etc.) to the Python world. It automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from your Pipfile as you install/uninstall packages. It also generates the ever-important Pipfile.lock, which is used to produce deterministic builds.  
 To know more access: https://github.com/pypa/pipenv
