@@ -190,13 +190,12 @@ If so, the first thing you should do is expand your filesystem to include all av
 sudo raspi-config
 ```
 And then select Advanced Options => Expand filesystem:  
-![cli login](https://www.pyimagesearch.com/wp-content/uploads/2018/08/install-opencv4-rpi-expandfs-768x580.jpg)
+![Expand FS](https://www.pyimagesearch.com/wp-content/uploads/2018/08/install-opencv4-rpi-expandfs-768x580.jpg)
 
 In raspi-config: Go back to the main screen and then select Boot Options => Desktop / CLI => Console Autologin:  
 ![cli login](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_console_login.jpg)
 
-In raspi-config: Go back to the main screen and select Advanced Options => Memory Split, where you’ll see the 64MB prompt:
-
+In raspi-config: Go back to the main screen and select Advanced Options => Memory Split, where you’ll see the 64MB prompt:  
 ![memory split](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_memory_split.jpg)
 
 Update this value to be 16MB and then exit.
@@ -213,7 +212,8 @@ In [recommended terminal](#recommended-terminal) (connected to Raspberry Pi [by 
 ~/install-opencv-dlib-raspbian/install.sh
 ```
 
-*Take a walk... It´ll take a while
+*Do exercises, take a shower, take a nap... It´ll take a while, actually hours...  
+![pc](readme_images/homer.gif)  
 
 ```bash
 git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi && cd ~/severinopi
@@ -223,7 +223,10 @@ git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi
 pipenv install && pipenv shell
 ```
 
-*Get some coffee... It´ll take a while
+>It´ll install the packages in Pipfile, like Numpy and Dlib
+
+*Get some coffee... It´ll take a while  
+![pc](readme_images/coffee.gif)  
 
 >Pipenv is a tool that aims to bring the best of all packaging worlds (bundler, composer, npm, cargo, yarn, etc.) to the Python world. It automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from your Pipfile as you install/uninstall packages. It also generates the ever-important Pipfile.lock, which is used to produce deterministic builds.  
 To know more access: https://github.com/pypa/pipenv
