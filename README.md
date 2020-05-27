@@ -232,6 +232,10 @@ pipenv install && pipenv shell
 To know more access: https://github.com/pypa/pipenv
 
 ```bash
+~/install-opencv-dlib-raspbian/link-virtualenv.sh
+```
+
+```bash
 ~/install-opencv-dlib-raspbian/swapfile.sh 100
 ```
 IMPORTANT: You can then reset your GPU/RAM split to 64MB as well as update the boot options to boot into the desktop interface versus the command line.  
