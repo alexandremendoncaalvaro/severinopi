@@ -88,8 +88,6 @@ You should change the default password straight away to ensure your Raspberry Pi
 Follow the steps on the screen to configure Raspberry Pi for the first use.  
 It´s important to configure Wifi or Ethernet in the same network of your computer.
 
->Alternative: Install using NOOBS by following this [video tutorial](https://www.youtube.com/watch?v=jsi50bCo_W4)
-
 #### Enable Raspberry Pi Features
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
@@ -165,30 +163,76 @@ You can then open any folder or workspace on the remote machine using File > Ope
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
 
-In terminal (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
+### Install OpenCV and Dlib
+
+![pc](readme_images/pc.png)  
+
+In [recommended terminal](#recommended-terminal) (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
+
+```bash
+git clone https://github.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian.git ~/install-opencv-dlib-raspbian && cd ~/install-opencv-dlib-raspbian
+```
+
+```bash
+chmod +x ~/install-opencv-dlib-raspbian/*.sh
+```
+
+```bash
+~/install-opencv-dlib-raspbian/swapfile.sh
+```
+
+#### Prepare Raspberry Pi to install OpenCV and Dlib
+
+Are you using a brand new install of Raspbian Stretch?  
+If so, the first thing you should do is expand your filesystem to include all available space on your micro-SD card:
+
+```bash
+sudo raspi-config
+```
+And then select Advanced Options => Expand filesystem:  
+![cli login](https://www.pyimagesearch.com/wp-content/uploads/2018/08/install-opencv4-rpi-expandfs-768x580.jpg)
+
+In raspi-config: Go back to the main screen and then select Boot Options => Desktop / CLI => Console Autologin:  
+![cli login](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_console_login.jpg)
+
+In raspi-config: Go back to the main screen and select Advanced Options => Memory Split, where you’ll see the 64MB prompt:
+
+![memory split](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_memory_split.jpg)
+
+Update this value to be 16MB and then exit.
+
+Upon exiting, raspi-config will ask if you would like to reboot your system.
+
+Go ahead and reboot, then we can move on with the rest of the install tutorial.
+
+#### After reboot
+
+In [recommended terminal](#recommended-terminal) (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
+
+```bash
+~/install-opencv-dlib-raspbian/install.sh
+```
+
+*Take a walk... It´ll take a while
 
 ```bash
 git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi && cd ~/severinopi
 ```
 
 ```bash
-sudo apt update && sudo apt upgrade
-```
-
-```bash
-sudo apt install pipenv
-```
-
-```bash
 pipenv install && pipenv shell
 ```
 
-*Get a coffee, take a walk... It´ll take a while
+*Get some coffee... It´ll take a while
 
 >Pipenv is a tool that aims to bring the best of all packaging worlds (bundler, composer, npm, cargo, yarn, etc.) to the Python world. It automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from your Pipfile as you install/uninstall packages. It also generates the ever-important Pipfile.lock, which is used to produce deterministic builds.  
 To know more access: https://github.com/pypa/pipenv
 
-
+```bash
+~/install-opencv-dlib-raspbian/swapfile.sh 100
+```
+IMPORTANT: You can then reset your GPU/RAM split to 64MB as well as update the boot options to boot into the desktop interface versus the command line.  
+Use the process detailed in ["Prepare Raspberry Pi to install OpenCV and Dlib"](#prepare-raspberry-pi-to-install-opencv-and-dlib)
 
 ## Are you a native english speaker?
 

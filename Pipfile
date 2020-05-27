@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-opencv-contrib-python = "==4.1.1.26"
+numpy = "==1.18.4"
 dlib = "==19.19.0"
 
 [dev-packages]
