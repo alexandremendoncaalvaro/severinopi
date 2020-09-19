@@ -1,7 +1,7 @@
 # Severino Pi (alpha version)
 ![Severino Pi](readme_images/severinopi.jpg)
 
-**Initial development is in progress. No releaes yet.**
+**Initial development is in progress. No releases yet.**
 
 Access control with face recognition for Raspberry Pi.
 
@@ -52,14 +52,14 @@ Use this to calculate the resistor value: https://www.hobby-hour.com/electronics
 
 **Short answer: Yes, you will do.**  
 First, to configure the SD Card for the first run of Raspberry Pi.  
-After that, you will want to enclosure the hardware for installation, and the idea of remove the SD card every time that you need to do configuration changes is a nightmare.
+After that, you will want to enclosure the hardware for installation, and the idea of remove the SD card, or connect cables every time that you need to do a configuration change is a nightmare.  
 So, I strongly recommend that you use an extra computer to handle Raspberry Pi remotely.
 
 ### Computer Software
 
 * Supported [SSH Client](https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client)
 * [VS Code](https://code.visualstudio.com/download)
-  * The fantastic plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)  
+* The fantastic VS Code plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)  
 * X11 Forwarding tool
   * MacOS
     * [XQuartz](https://www.xquartz.org/)
@@ -257,7 +257,8 @@ If you want to check what is under the hood: [Here is the open source code](http
 ![gpio](readme_images/gpio.jpg)  
 >In my specific case the resistor needed was 330 Ω
 
-### Install
+### Soft power button System Configuration
+![rasp](readme_images/rasp.png)  
 * Run in Raspberry Pi Terminal:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alexandremendoncaalvaro/soft-power-button-raspberry/master/install.sh)"
