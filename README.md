@@ -1,6 +1,7 @@
-# Severino Pi
-
+# Severino Pi (alpha version)
 ![Severino Pi](readme_images/severinopi.jpg)
+
+**Initial development is in progress. No releaes yet.**
 
 Access control with face recognition for Raspberry Pi.
 
@@ -9,12 +10,15 @@ Access control with face recognition for Raspberry Pi.
 
 ## Background
 
-It´s a Raspberry Pi port and refactoring from my [Face Access project](https://github.com/alexandremendoncaalvaro/face-access).  
-This project is for Makers! People that love the concept of DIY (Do It Yourself). The idea is making a very easy option to put access control with face recognition at your door.  
+This project is a Raspberry Pi port and refactoring from my [Face Access project](https://github.com/alexandremendoncaalvaro/face-access).  
+This project is for Makers! People that love the concept of DIY (Do It Yourself).  
+The idea is to make a very easy option to build an DIY access control with face recognition at your door.  
 
-You can use it private, modify, distribute and even sell.  
-Feel free to make a fork and contribute with the project upgrade and maintenance.
-It´s MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+It´s MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.  
+
+![MIT License](readme_images/mit-license.png)
+
+Feel free to make a fork and contribute with the project upgrade and maintenance.  
 
 So.. Don´t worry, be happy!
 
@@ -32,40 +36,46 @@ So.. Don´t worry, be happy!
 * Solenoid Door lock
 * 5V Relay module
 * 12VDC Power source
+* Push-button (with or without LED)³
 
->¹Unlike USB webcam, the Camera module is connected directly to the GPU  
-²At least for the configuration process
+>¹Unlike USB webcam, the Camera module is connected directly to the Raspberry Pi GPU  
+²At least for the configuration process  
+³If your button have LED use a resistor to drop-down current  
+Use this to calculate the resistor value: https://www.hobby-hour.com/electronics/ledcalc.php
 
-### Raspberry Pi software
+### Raspberry Pi software and O.S.
 
 * Raspbian Buster or above
 * Python 3.7 or above
 
-### Do I need an extra computer?
+### Do I really need an extra computer?
 
-Short answer: Yes, you will do.  
-First, to configure the SDCard to Raspberry Pi and the first configuration of Raspbian.  
-After that, you will install your hardware in some infrastructure and it's a terrible idea to remove it every time to do configuration changes.
-So, it´s not absolutely necessary, but I strongly recommend that you use an extra computer to handle Raspberry Pi remotely.
+**Short answer: Yes, you will do.**  
+First, to configure the SD Card for the first run of Raspberry Pi.  
+After that, you will want to enclosure the hardware for installation, and the idea of remove the SD card every time that you need to do configuration changes is a nightmare.
+So, I strongly recommend that you use an extra computer to handle Raspberry Pi remotely.
 
 ### Computer Software
 
-Tested on Windows 10, Ubuntu 20.04 LTS and MacOS X Mojave.
-
 * Supported [SSH Client](https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client)
 * [VS Code](https://code.visualstudio.com/download)
-  * The fantastic plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
-* MacOS
-  * [XQuartz](https://www.xquartz.org/)
-* Windows
-  * [MobaxTerm](https://mobaxterm.mobatek.net/)
+  * The fantastic plugin: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)  
+* X11 Forwarding tool
+  * MacOS
+    * [XQuartz](https://www.xquartz.org/)
+  * Windows
+    * [MobaxTerm](https://mobaxterm.mobatek.net/)
+  * Linux
+    * Native
 
-## Install
+>Tested on Windows 10, Ubuntu 20.04 LTS and MacOS X Mojave.
+
+# Install
 
 To start, on Raspberry Pi connect only the camera module.  
 ![rasp camera](readme_images/connect-camera.gif)
 
-### Raspbian
+## Raspbian
 
 ![pc](readme_images/pc.png)  
 Use Raspberry Pi Imager for an easy way to install Raspbian and other operating systems to an SD card ready to use with your Raspberry Pi:
@@ -88,7 +98,7 @@ You should change the default password straight away to ensure your Raspberry Pi
 Follow the steps on the screen to configure Raspberry Pi for the first use.  
 It´s important to configure Wifi or Ethernet in the same network of your computer.
 
-#### Enable Raspberry Pi Features
+### Enable Raspberry Pi Features
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
 Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.
@@ -109,38 +119,38 @@ In my case it´s connected by Wifi, and returns:
 
 >Take note of the address of your connected interface.
 
-### Remote Control
+## Remote Control
 
-You have a lot of options to control your Raspberry Pi remotely, like simple [VNC access](https://www.raspberrypi.org/documentation/remote-access/vnc/).  
-But all of your environment features need to be installed on Raspberry Pi, and it's expend a lot of resources of Raspberry Pi.  
+You have several options to control your Raspberry Pi remotely, like a simple [VNC access](https://www.raspberrypi.org/documentation/remote-access/vnc/).  
+But with this aproach all of your environment features needs to be installed on Raspberry Pi, and it's expend a lot of resources of Raspberry Pi.  
 
-Let's keep all enviroment features at your computer and only install the resources to run the application on your Raspberry Pi.
+So, let's keep all enviroment features on your computer and only install the resources to run the application on your Raspberry Pi.
 
-### Integrated Development Enviroment (IDE)
+## Integrated Development Enviroment (IDE)
 
 ![pc](readme_images/pc.png)  
 >Please check carefully and install all the [Computer Software recomended requirements](#computer-software).
 
-#### Recommended Terminal
+### Recommended Terminal
 
 The [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) does not currently enable X11 forwarding in VSCode Terminal witch is necessary to see graphical resources on your computer. (see [issue #267](https://github.com/microsoft/vscode-remote-release/issues/267)).  
 So we are going to use recommended terminal and X11 Forwarding app for each Operational System:
 
-* Linux: Only System Terminal (Raspberry Pi uses Linux too, so the integration is easier)
-* MacOS: System Terminal with XQuartz
-* Windows: MobaXterm (Very powerfull and easy)
+* Linux: System Terminal (Native resource)
+* MacOS: System Terminal with [XQuartz](https://www.xquartz.org/)
+* Windows: [MobaxTerm](https://mobaxterm.mobatek.net/) (Very powerfull and easy)
 
-#### SSH Connection
+### SSH Connection
 
 > Remember to run the X11 Forwarding Server In MacOS (XQuartz) before connect.
 
 Open the [recommended terminal](#recommended-terminal) and verify you can connect to the SSH host by running the following command replacing IP address as appropriate:
 
 ```bash
-ssh -X pi@192.168.0.42
+ssh -Y pi@192.168.0.42
 ```
 
-#### File Transfer
+### File Transfer
 
 You can tranfer files using the SCP command like this example, replacing parameters as appropriate ([more details here](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files)):  
 
@@ -148,7 +158,7 @@ You can tranfer files using the SCP command like this example, replacing paramet
 scp file.txt pi@192.168.0.42:/remote/directory
 ```
 
-> In Windows you can use MobaXterm
+> In Windows you can use MobaXterm Visual Interface
 
 In VS Code select Remote-SSH: Connect to Host... from the Command Palette (F1) and use the same pi@ipaddress as in last step.
 
@@ -163,84 +173,104 @@ You can then open any folder or workspace on the remote machine using File > Ope
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
 
-### Install OpenCV and Dlib
+## Install OpenCV and Dlib
+### About PIPENV
 
-![pc](readme_images/pc.png)  
+We´re going to use PIPENV.  
+This great tool brings python virtual environment and package management to another level.  
 
-In [recommended terminal](#recommended-terminal) (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
+To know more access: https://github.com/pypa/pipenv
 
-```bash
-git clone https://github.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian.git ~/install-opencv-dlib-raspbian && cd ~/install-opencv-dlib-raspbian
-```
+### After installation  
+To run any python file you will need to enable pipenv resources at the terminal.
 
-```bash
-chmod +x ~/install-opencv-dlib-raspbian/*.sh
-```
-
-```bash
-~/install-opencv-dlib-raspbian/swapfile.sh
-```
-
-#### Prepare Raspberry Pi to install OpenCV and Dlib
-
-Are you using a brand new install of Raspbian Stretch?  
-If so, the first thing you should do is expand your filesystem to include all available space on your micro-SD card:
+To enable an installed pipenv enviroment, navigate to the project folder (the one with Pipfile) and run:
 
 ```bash
-sudo raspi-config
+pipenv shell
 ```
-And then select Advanced Options => Expand filesystem:  
-![Expand FS](https://www.pyimagesearch.com/wp-content/uploads/2018/08/install-opencv4-rpi-expandfs-768x580.jpg)
 
-In raspi-config: Go back to the main screen and then select Boot Options => Desktop / CLI => Console Autologin:  
-![cli login](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_console_login.jpg)
-
-In raspi-config: Go back to the main screen and select Advanced Options => Memory Split, where you’ll see the 64MB prompt:  
-![memory split](https://www.pyimagesearch.com/wp-content/uploads/2017/05/raspbian_dlib_install_memory_split.jpg)
-
-Update this value to be 16MB and then exit.
-
-Upon exiting, raspi-config will ask if you would like to reboot your system.
-
-Go ahead and reboot, then we can move on with the rest of the install tutorial.
-
-#### After reboot
-
-In [recommended terminal](#recommended-terminal) (connected to Raspberry Pi [by SSH](#ssh-connection)) run each following command:
+To install new PIP libraries use pipenv instead of pip, like:
 
 ```bash
-~/install-opencv-dlib-raspbian/install.sh
+pipenv install numpy
 ```
+
+## Two commands installation
+
+ OpenCV and Dlib installation is very tricky. But, I've create a script to automate the process, and you will need only two commands and a lot of pacience.  
+
+ If you want to check what is under the hood: [Here is the open source code](https://github.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian)
+
+1) Navigate to YOUR PYTHON PROJECT FOLDER in Raspbian Terminal, then run:
+
+>If you don´t have a project folder, just create a new folder and navigate to it
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian/master/easy-install.sh)"
+```
+>In the end it will reboot to command line interface
+
+2) Run:
+
+```bash
+~/install-opencv-dlib-raspbian/easy-install-after-reboot.sh
+```
+>In the end it will reboot to desktop interface
 
 *Do exercises, take a shower, take a nap... It´ll take a while, actually hours...  
 ![pc](readme_images/homer.gif)  
 
-```bash
-git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi && cd ~/severinopi
-```
+## Testing OpenCV
+
+in Raspbian Terminal:
 
 ```bash
-pipenv install && pipenv shell
+~/install-opencv-dlib-raspbian/test-opencv.sh
 ```
 
->It´ll install the packages in Pipfile, like Numpy and Dlib
+>It will test for python 2 and 3 and will open a grayscale window for each test.
 
-*Get some coffee... It´ll take a while  
-![pc](readme_images/coffee.gif)  
+## Testing DLIB
 
->Pipenv is a tool that aims to bring the best of all packaging worlds (bundler, composer, npm, cargo, yarn, etc.) to the Python world. It automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from your Pipfile as you install/uninstall packages. It also generates the ever-important Pipfile.lock, which is used to produce deterministic builds.  
-To know more access: https://github.com/pypa/pipenv
+in Raspbian Terminal:
 
 ```bash
-~/install-opencv-dlib-raspbian/link-virtualenv.sh
+~/install-opencv-dlib-raspbian/test-dlib.sh
 ```
 
+then:
+
 ```bash
-~/install-opencv-dlib-raspbian/swapfile.sh 100
+cd ~/install-opencv-dlib-raspbian && python ~/install-opencv-dlib-raspbian/test-dlib.py
 ```
-IMPORTANT: You can then reset your GPU/RAM split to 64MB as well as update the boot options to boot into the desktop interface versus the command line.  
-Use the process detailed in ["Prepare Raspberry Pi to install OpenCV and Dlib"](#prepare-raspberry-pi-to-install-opencv-and-dlib)
+
+# Equipment Build
+## Soft power button
+Like ATX Power supply purpose on PCs, we need to avoid corrupted or lost data when turning off devices with embedded operating system environments.
+So, this is a simple way to install and use a similar resource for Raspberry Pi with Raspbian.  
+
+I've create a script to automate the configuration.  
+If you want to check what is under the hood: [Here is the open source code](https://github.com/alexandremendoncaalvaro/soft-power-button-raspberry)
+
+### Hardware connection
+![gpio](readme_images/gpio.jpg)  
+>In my specific case the resistor needed was 330 Ω
+
+### Install
+* Run in Raspberry Pi Terminal:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alexandremendoncaalvaro/soft-power-button-raspberry/master/install.sh)"
+```
+* Reboot Raspberry Pi
+* Done!
+
+### Soft power button usage
+Like in modern PCs, just press the power button to turn it on or off.
+
+# Using the system
+## Handling users
+
 
 ## Are you a native english speaker?
-
 No, I am not. If you find typos, grammar errors or whatever please feel free to PR or tell me.

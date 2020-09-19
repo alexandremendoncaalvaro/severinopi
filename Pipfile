@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 numpy = "==1.18.4"
 dlib = "==19.19.0"
+imutils = "*"
+picamera = "*"
 
 [dev-packages]
 
