@@ -181,10 +181,9 @@ This great tool brings python virtual environment and package management to anot
 
 To know more access: https://github.com/pypa/pipenv
 
-### After installation  
-To run any python file you will need to enable pipenv resources at the terminal.
-
-To enable an installed pipenv enviroment, navigate to the project folder (the one with Pipfile) and run:
+### IMPORTANT
+EVERY TIME you open a new terminal to run a python file you will need to enable pipenv resources at the terminal.  
+To enable an installed pipenv enviroment, navigate to the project folder (the one with Pipfile) and run:  
 
 ```bash
 pipenv shell
@@ -223,7 +222,7 @@ pipenv install numpy
 
 ## Testing OpenCV
 
-in Raspbian Terminal:
+in Raspbian Terminal or Remote Terminal with SSH and X11 Forwarding:
 
 ```bash
 ~/install-opencv-dlib-raspbian/test-opencv.sh
@@ -233,7 +232,7 @@ in Raspbian Terminal:
 
 ## Testing DLIB
 
-in Raspbian Terminal:
+in Raspbian Terminal or Remote Terminal with SSH and X11 Forwarding:
 
 ```bash
 ~/install-opencv-dlib-raspbian/test-dlib.sh
