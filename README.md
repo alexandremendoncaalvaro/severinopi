@@ -269,8 +269,9 @@ If you want to check what is under the hood: [Here is the open source code](http
 Like in modern PCs, just press the power button to turn it on or off.
 
 # Using the system
+UNDER CONSTRUCTION
 ## Handling users
-
+UNDER CONSTRUCTION
 
 ## Are you a native english speaker?
 No, I am not. If you find typos, grammar errors or whatever please feel free to PR or tell me.
