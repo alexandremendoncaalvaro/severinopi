@@ -28,7 +28,7 @@ So.. Don´t worry, be happy!
 
 * Raspberry Pi 3B+ or above
 * Compatible class 10 [SD Card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with 16GB or above
-* Raspberry Pi Camera Module ¹
+* Raspberry Pi Camera Module
 * Raspberry Pi LCD Screen (optional)
 * Raspberry Pi official font or USB Charger (at least 3A current) and USB Type-A to micro-USB cable (the most common found on smartphones)
 * Monitor ²
@@ -46,7 +46,7 @@ Use this to calculate the resistor value: https://www.hobby-hour.com/electronics
 ### Raspberry Pi software and O.S.
 
 * Raspbian Buster or above
-* Python 3.7 or above
+* Python 3.8 or above
 
 ### Do I really need an extra computer?
 

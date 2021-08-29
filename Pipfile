@@ -4,12 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "==1.18.4"
-dlib = "==19.19.0"
+opencv-contrib-python = "*"
+numpy = "*"
+dlib = "*"
 imutils = "*"
 picamera = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
