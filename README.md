@@ -80,9 +80,7 @@ To start, on Raspberry Pi connect only the camera module.
 ![pc](readme_images/pc.png)  
 Use Raspberry Pi Imager for an easy way to install Raspbian and other operating systems to an SD card ready to use with your Raspberry Pi:
 
-* [Raspberry Pi Imager for Windows](https://downloads.raspberrypi.org/imager/imager.exe)
-* [Raspberry Pi Imager for macOS](https://downloads.raspberrypi.org/imager/imager.dmg)
-* [Raspberry Pi Imager for Ubuntu](https://downloads.raspberrypi.org/imager/imager_amd64.deb)
+* [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
 Connect an SD card reader with the SD card inside.  
 Open Raspberry Pi Imager and choose Raspibian(recomended) from the OS list presented.  
@@ -174,25 +172,25 @@ You can then open any folder or workspace on the remote machine using File > Ope
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
 
 ## Install OpenCV and Dlib
-### About PIPENV
+### About poetry
 
-We´re going to use PIPENV.  
+We´re going to use poetry.  
 This great tool brings python virtual environment and package management to another level.  
 
-To know more access: https://github.com/pypa/pipenv
+To know more access: https://python-poetry.org/docs/
 
 ### IMPORTANT
-EVERY TIME you open a new terminal to run a python file you will need to enable pipenv resources at the terminal.  
-To enable an installed pipenv enviroment, navigate to the project folder (the one with Pipfile) and run:  
+EVERY TIME you open a new terminal to run a python file you will need to enable poetry resources at this terminal.  
+To enable an installed enviroment, navigate to the project folder (the one with config.toml file) and run:  
 
 ```bash
-pipenv shell
+poetry shell
 ```
 
-To install new PIP libraries use pipenv instead of pip, like:
+To install new PIP libraries use poetry instead of pip, like:
 
 ```bash
-pipenv install numpy
+poetry add numpy
 ```
 
 ## Two commands installation
