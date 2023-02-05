@@ -205,6 +205,15 @@ sudo chmod +x ~/severinopi/opencv_build/*.sh
 *Do exercises, take a shower, take a nap... It´ll take a while, actually hours...  
 ![pc](readme_images/homer.gif)  
 
+### Test OpenCV and Dlib
+If everything been well, you will see:
+* OpenCV Validation: A grayscale image portrait for 5 seconds
+* Dlib Validation: An image portrait with facial landmarks
+
+```bash
+~/severinopi/opencv_build/test-opencv-dlib.sh
+```
+
 # Equipment Build
 ## Hardware GPIO connection
 
