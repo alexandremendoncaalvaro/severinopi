@@ -1,12 +1,14 @@
-# Severino Pi (alpha version)
 ![Severino Pi](readme_images/severinopi.jpg)
 
+# Severino Pi (alpha version)
 **Initial development is in progress. No releases yet.**
 
 Access control with face recognition for Raspberry Pi.
 
 * MIT License
-* LGPD/ GDPR Safe
+* LGPD/ GDPR Safe*
+
+> *No sensitive data or image stored to do the facial recognition process. It uses image extracted features instead.
 
 ## Background
 
@@ -14,6 +16,8 @@ This project is a Raspberry Pi port and refactoring from my [Face Access project
 This project is for Makers! People that love the concept of DIY (Do It Yourself).  
 The idea is to make an easy option to build an DIY access control with face recognition at your door.  
 
+
+## MIT License
 It´s MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.  
 
 ![MIT License](readme_images/mit-license.png)
@@ -22,16 +26,60 @@ Feel free to make a fork and contribute with the project upgrade and maintenance
 
 So.. Don´t worry, be happy!
 
-## Recomended requirements
-### Hardware
+# Table of contents
+
+- [Severino Pi (alpha version)](#severino-pi--alpha-version-)
+  * [Background](#background)
+  * [MIT License](#mit-license)
+- [Table of contents](#table-of-contents)
+- [Recomended requirements](#recomended-requirements)
+  * [Hardware](#hardware)
+    + [My Raspberry Pi case](#my-raspberry-pi-case)
+  * [Raspberry Pi software and O.S.](#raspberry-pi-software-and-os)
+  * [Do I really need an extra computer?](#do-i-really-need-an-extra-computer-)
+  * [Computer Software](#computer-software)
+- [O.S. Install + Basic Configuration](#os-install---basic-configuration)
+  * [Raspbian](#raspbian)
+  * [Enable Raspberry Pi Features](#enable-raspberry-pi-features)
+- [Severino Pi System Install](#severino-pi-system-install)
+  * [About Virtual Enviroment](#about-virtual-enviroment)
+    + [Install](#install)
+    + [Create](#create)
+    + [Activate](#activate)
+    + [Deactivate](#deactivate)
+    + [IMPORTANT](#important)
+  * [Install OpenCV and Dlib](#install-opencv-and-dlib)
+    + [Two commands installation](#two-commands-installation)
+    + [Testing OpenCV](#testing-opencv)
+    + [Testing DLIB](#testing-dlib)
+- [Equipment Build](#equipment-build)
+  * [Hardware GPIO connection](#hardware-gpio-connection)
+  * [Soft power button](#soft-power-button)
+    + [Soft power button System Configuration](#soft-power-button-system-configuration)
+    + [Soft power button usage](#soft-power-button-usage)
+  * [FAN Cooling](#fan-cooling)
+- [Using SeverinoPi System](#using-severinopi-system)
+  * [User Management](#user-management)
+- [Raspberry Pi remote use tips](#raspberry-pi-remote-use-tips)
+  * [Get Raspberry Pi IP Address](#get-raspberry-pi-ip-address)
+  * [Integrated Development Enviroment (IDE)](#integrated-development-enviroment--ide-)
+  * [Recommended Terminal](#recommended-terminal)
+  * [SSH Connection](#ssh-connection)
+  * [Transfer Files](#transfer-files)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+# Recommended requirements
+## Hardware
 
 * Raspberry Pi
   * Raspberry Pi 3B+ or above
-  * Compatible class 10 [SD Card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with 16GB or above
+  * Compatible class 10 [SD Card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with 32GB or above
   * Raspberry Pi Camera Module
   * Raspberry Pi official charger
     * Or a 5V DC USB Charger (at least 3A) + USB Type-A to micro-USB cable
 * Configuration ²
+  * microSD to USB reader or equivalent
   * HDMI Monitor
   * HDMI cable
   * USB Mouse
@@ -40,33 +88,37 @@ So.. Don´t worry, be happy!
   * 12V DC Solenoid Door lock + Power source
   * 5V DC Relay module
 * Extra Features
-  * Raspberry Pi LCD Screen (optional, you can use a monitor instead)
   * Push-button (with or without LED)³
+  * Raspberry Pi LCD Screen (recommended, but you can use a HDMI monitor instead)⁴
   * DIY Case for Raspberry, Camera, LCD, Power Button
 
 >¹Unlike USB webcam, the Camera module is connected directly to the Raspberry Pi GPU  
 ²At least for the first configuration process  
-³If your button have LED use a resistor to drop-down current  
-Use this to calculate the resistor value: https://www.hobby-hour.com/electronics/ledcalc.php  
+³If your button have LED use a resistor to drop-down current use this to calculate the resistor value: https://www.hobby-hour.com/electronics/ledcalc.php  
+⁴My HDMI LCD model is 7 inches 800x480px  
 
-#### My Raspberry case  
-![Case Front](readme_images/case_front.JPG)  
-![Case Back](readme_images/case_back.JPG)  
-![Case Internal](readme_images/case_intern.JPG)  
+### My Raspberry Pi case  
+I drew a Raspberry Pi case for a freelance job, so I used a spare one for this project.  
+I cannot provide the schematics for this case, because it's property of the client. But you can buy a plastic box and adapt it or something else... be creative.  
 
-### Raspberry Pi software and O.S.
+Some pictures of my DIY case for reference:  
+![Case Front](readme_images/case_front.jpg)  
+![Case Back](readme_images/case_back.jpg)  
+![Case Internal](readme_images/case_internal.jpg)  
 
-* Raspbian Buster or above
+## Raspberry Pi software and O.S.
+
+* Raspberry Pi OS Buster or above
 * Python 3.8 or above
 
-### Do I really need an extra computer?
+## Do I really need an extra computer?
 
 **Short answer: Yes, you will do.**  
 First, to configure the SD Card for the first run of Raspberry Pi.  
 After that, you will want to enclosure the hardware for installation, and the idea of remove the SD card, or connect cables every time that you need to do a configuration change is a nightmare.  
 So, I strongly recommend that you use an extra computer to handle Raspberry Pi remotely.
 
-### Computer Software
+## Computer Software
 
 * Supported [SSH Client](https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client)
 * [VS Code](https://code.visualstudio.com/download)
@@ -81,20 +133,18 @@ So, I strongly recommend that you use an extra computer to handle Raspberry Pi r
 
 >Tested with Windows 10, Ubuntu 20.04 LTS and MacOS X Mojave.
 
-# Install
-
+# O.S. Install + Basic Configuration
+## Raspberry Pi OS
 To start, on Raspberry Pi connect only the camera module.  
 ![rasp camera](readme_images/connect-camera.gif)
 
-## Raspbian
-
 ![pc](readme_images/pc.png)  
-Use Raspberry Pi Imager for an easy way to install Raspbian and other operating systems to an SD card ready to use with your Raspberry Pi:
+Use Raspberry Pi Imager for an easy way to install Raspberry Pi OS and other operating systems to an SD card ready to use with your Raspberry Pi:
 
 * [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
 Connect an SD card reader with the SD card inside.  
-Open Raspberry Pi Imager and choose Raspibian(recomended) from the OS list presented.  
+Open Raspberry Pi Imager and choose Raspberry Pi OS(recommended) from the OS list presented.  
 Choose the SD card you wish to write your image to.  
 Review your selections and click 'WRITE' to begin writing data to the SD card.  
 >Note: if using the Raspberry Pi Imager on Windows 10 with Controlled Folder Access enabled, you will need to explicitly allow the Raspberry Pi Imager permission to write the SD card. If this is not done, the Raspberry Pi Imager will fail with a "failed to write" error.
@@ -105,103 +155,59 @@ Insert the SD card into the Raspberry Pi and power it up by connecting the charg
 If you need to manually log in, the default user name is **pi**, with password **raspberry**. Remember the default keyboard layout is set to UK.  
 You should change the default password straight away to ensure your Raspberry Pi is secure.  
 Follow the steps on the screen to configure Raspberry Pi for the first use.  
-It´s important to configure Wifi or Ethernet in the same network of your computer.  
+It´s important to configure WiFi or Ethernet in the same network of your computer.  
 
 ## Enable Raspberry Pi Features
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
-Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspbian from that point on.  
+Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspberry Pi OS from that point on.  
 
 ![menu](readme_images/pi-configuration-menu.png)
 ![SSH](readme_images/ssh.jpg)
 
-> *If the camera option is not avaliable, use raspi-config command from terminal and enable the Legacy Camera inside Interfaces option  
+> *If the camera option is not available, use raspi-config command from terminal and enable the Legacy Camera inside Interfaces option  
 > *Read more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)
 
+# Severino Pi System Install
+From this step we are going to remote access the Raspberry Pi terminal.  
+> See the [Raspberry Pi remote use tips](#raspberry-pi-remote-use-tips) session
 
-* See the [Raspberry Pi remote use tips](#raspberry-pi-remote-use-tips) session
-
-## Install OpenCV and Dlib
-### About Virtual Enviroment
-
-We´re going to use Virtual Enviroments.  
-This tool brings python package management to another level.  
-
-#### Install
+## Repository clone
+First, you will need to clone this repo to your Raspberry Pi.  
+Raspberry Pi OS Terminal:
 ```bash
-pip install virtualenv
-```
-#### Create
-```bash
-virtualenv virtualenv_name
-```
-#### Activate
-```bash
-source virtualenv_name/bin/activate
-```
-#### Deactivate
-```bash
-deactivate
+git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi
 ```
 
-### IMPORTANT
+## Python Virtual Environment
+Create and activate the virtual environment at the project to install the python libraries.  
+> See the [About Virtual Environments](#about-virtual-environments) session
 
-EVERY TIME you open a new terminal to run a python file you will need to enable virtualenv resources at this terminal.  
-To enable an installed enviroment, navigate to the project folder and run:  
+## Install OpenCV, Dlib, Facial Recognition and other libraries
+In most cases you can just install pre-compiled version of OpenCV and other required libraries using the command **pip install**.  
+But for this project I decided to make it optimized to Raspberry Pi... and to be fair I believe It's not be possible without this optimization.
+So we'll need to build at least OpenCV library for our Raspberry Pi ARM architecture.
 
-```bash
-source virtualenv_name/bin/activate
-```
-Now you can install pip packages inside the virtual enviroment  
+### OpenCV Build Easy!
 
-## Two commands installation
+ OpenCV building process is very tricky. But, I've create a script to automate the process, and you will need only two commands and a lot of patience.  
 
- OpenCV and Dlib installation is very tricky. But, I've create a script to automate the process, and you will need only two commands and a lot of pacience.  
-
- If you want to check what is under the hood: [Here is the open source code](https://github.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian)
-
-1) Navigate to YOUR PYTHON PROJECT FOLDER in Raspbian Terminal, then run:
-
->If you don´t have a project folder, just create a new folder and navigate to it
+1) Navigate to **~/severinopi** in Raspberry Pi OS Terminal, then run:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alexandremendoncaalvaro/install-opencv-dlib-raspbian/master/easy-install.sh)"
+~/severinopi/opencv_build/prepare.sh
 ```
 >In the end it will reboot to command line interface
 
 2) Run:
 
 ```bash
-~/install-opencv-dlib-raspbian/easy-install-after-reboot.sh
+~/severinopi/opencv_build/install.sh
 ```
 >In the end it will reboot to desktop interface
 
 *Do exercises, take a shower, take a nap... It´ll take a while, actually hours...  
 ![pc](readme_images/homer.gif)  
-
-## Testing OpenCV
-
-in Raspbian Terminal or Remote Terminal with SSH and X11 Forwarding:
-
-```bash
-~/install-opencv-dlib-raspbian/test-opencv.sh
-```
-
->It will test for python 2 and 3 and will open a grayscale window for each test.
-
-## Testing DLIB
-
-in Raspbian Terminal or Remote Terminal with SSH and X11 Forwarding:
-
-```bash
-~/install-opencv-dlib-raspbian/test-dlib.sh
-```
-
-then:
-
-```bash
-cd ~/install-opencv-dlib-raspbian && python ~/install-opencv-dlib-raspbian/test-dlib.py
-```
 
 # Equipment Build
 ## Hardware GPIO connection
@@ -212,7 +218,7 @@ cd ~/install-opencv-dlib-raspbian && python ~/install-opencv-dlib-raspbian/test-
 ## Soft power button
 
 Like ATX Power supply purpose on PCs, we need to avoid corrupted or lost data when turning off devices with embedded operating system environments.
-So, this is a simple way to install and use a similar resource for Raspberry Pi with Raspbian.  
+So, this is a simple way to install and use a similar resource for Raspberry Pi with Raspberry Pi OS.  
 
 I've create a script to automate the configuration.  
 If you want to check what is under the hood: [Here is the open source code](https://github.com/alexandremendoncaalvaro/soft-power-button-raspberry)
@@ -238,12 +244,27 @@ Like in modern PCs, just press the power button to turn it on or off.
 If you would like to have some FAN, be cool.  
 
 ![rasp](readme_images/rasp.png)  
-* Setup a cooling fan and NPN transistor accordind to [diagram](#hardware-gpio-connection).
+* Setup a cooling fan and NPN transistor according to [diagram](#hardware-gpio-connection).
 * Add config device tree overlays on /boot/config.txt.
+  ```text 
+  dtoverlay=gpio-fan,gpiopin=12,temp=60000
   ```
-  dtoverlay=gpio-fan,gpiopin=12,temp=55000
+* Reboot Raspberry Pi
+* Done!
+
+## HDMI 7 inch LCD Display
+If you use the same LCD Display than me:
+* Add this config on /boot/config.txt
+  ```text 
+  # Display LCD HDMI 7 inches 800X480 configuration
+  max_usb_current=1
+  hdmi_force_hotplug=1
+  config_hdmi_boost=7
+  hdmi_group=2
+  hdmi_mode=87
+  hdmi_drive=1
+  hdmi_cvt 800 480 60 6 0 0 0
   ```
-* Restart Raspberry PI
 
 # Using SeverinoPi System
 
@@ -256,9 +277,9 @@ UNDER CONSTRUCTION
 # Raspberry Pi remote use tips  
 
 You have several options to control your Raspberry Pi remotely, like a simple [VNC access](https://www.raspberrypi.org/documentation/remote-access/vnc/).  
-But with this aproach all of your environment features needs to be installed on Raspberry Pi, and it's expend a lot of resources of Raspberry Pi.  
+But with this approach all of your environment features needs to be installed on Raspberry Pi, and it's expend a lot of resources of Raspberry Pi.  
 
-So, let's keep all enviroment features on your computer and only install the resources to run the application on your Raspberry Pi.  
+So, let's keep all environment features on your computer and only install the resources to run the application on your Raspberry Pi.  
 
 ## Get Raspberry Pi IP Address
 
@@ -275,10 +296,10 @@ In my case it´s connected by Wifi, and returns:
 
 >Take note of the address of your connected interface.
 
-## Integrated Development Enviroment (IDE)
+## Integrated Development Environment (IDE)
 
 ![pc](readme_images/pc.png)  
->Please check carefully and install all the [Computer Software recomended requirements](#computer-software).
+>Please check carefully and install all the [Computer Software recommended requirements](#computer-software).
 
 ## Recommended Terminal
 
@@ -321,3 +342,48 @@ After you are connected, you'll be in an empty window. You can always refer to t
 You can then open any folder or workspace on the remote machine using File > Open... or File > Open Workspace... just as you would locally!
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
+
+# About Virtual Environments
+
+We´re going to use Virtual Environments in this project.  
+This tool brings python package management to another level.  
+
+### Install
+```bash
+pip install virtualenv
+```
+### Create
+```bashs
+virtualenv virtualenv_name
+```
+### Activate
+```bash
+source virtualenv_name/bin/activate
+```
+### Deactivate
+```bash
+deactivate
+```
+
+### IMPORTANT
+
+EVERY TIME you open a new terminal to run a python file you will need to enable virtualenv resources at this terminal.  
+To enable an installed enviroment, navigate to the project folder and run:  
+
+```bash
+source virtualenv_name/bin/activate
+```
+Now you can install pip packages inside the virtual environment  
+
+# OpenCV Build References
+Main reference used for dependencies and build parameters:  
+https://qengineering.eu/install-opencv-lite-on-raspberry-pi.html  
+
+Other references:  
+https://www.pyimagesearch.com/2017/05/01/install-dlib-raspberry-pi/  
+https://www.pyimagesearch.com/2018/01/22/install-dlib-easy-complete-guide/  
+https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/  
+https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/  
+https://www.youtube.com/watch?v=uF4aDdxBm_M  
+https://gist.github.com/chirag773/b4c94b5bb4b2e7fcac0d21680c5d4492  
+https://gist.github.com/willprice/abe456f5f74aa95d7e0bb81d5a710b60  
