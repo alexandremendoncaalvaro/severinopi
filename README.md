@@ -156,13 +156,24 @@ It´s important to configure WiFi or Ethernet in the same network of your comput
 ## Enable Raspberry Pi Features
 
 On your Raspberry Pi, choose Menu > Preferences > Raspberry Pi Configuration.  
-Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t need to restart your Raspberry Pi, and SSH will be enabled whenever you use that installation of Raspberry Pi OS from that point on.  
+Click on Interfaces and set Camera and SSH to Enabled. Click OK.  
+Restart your Raspberry Pi, camera and SSH will be enabled whenever you use that installation of Raspberry Pi OS from that point on.  
 
 ![menu](readme_images/pi-configuration-menu.png)
 ![SSH](readme_images/ssh.jpg)
 
-> *If the camera option is not available, use raspi-config command from terminal and enable the Legacy Camera inside Interfaces option  
+> *If the camera option is not available, use **sudo raspi-config** command from terminal and enable the Legacy Camera inside Interfaces option  
 > *Read more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)  
+
+# Checking the PiCamera
+Now your Camera Module is connected and the software is enabled, try out the command line tool **raspistill**.  
+From Raspberry Pi OS Terminal type in the following command to take a still picture and save it to the Desktop:
+```bash
+raspistill -o Desktop/image.jpg
+```
+When the command runs, you can see the camera preview open for five seconds before a still picture is taken.
+
+Look for the picture file icon on the Desktop, and double-click the file icon to open the picture.
 
 # Severino Pi System Install
 From this step we are going to remote access the Raspberry Pi terminal.  
@@ -347,6 +358,13 @@ After you are connected, you'll be in an empty window. You can always refer to t
 You can then open any folder or workspace on the remote machine using File > Open... or File > Open Workspace... just as you would locally!
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
+
+# Test PiCamera with OpenCV remotely
+When you finish the process to [install OpenCV, Dlib, Facial Recognition and other libraries](#install-opencv--dlib--facial-recognition-and-other-libraries) you will can use this command via terminal ssh (with X11 Forwarding) to stream the raspberry camera on your remote PC:
+```bash
+~/severinopi/opencv_build/test-picamera.sh
+```
+> Press 'q' to exit
 
 # OpenCV Build References
 Main reference used for dependencies and build parameters:  
