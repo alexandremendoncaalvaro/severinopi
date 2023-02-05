@@ -190,6 +190,7 @@ So we'll need to build at least OpenCV library for our Raspberry Pi ARM architec
 1) Navigate to **~/severinopi** in Raspberry Pi OS Terminal, then run:
 
 ```bash
+sudo chmod +x ~/severinopi/opencv_build/*.sh
 ~/severinopi/opencv_build/prepare.sh
 ```
 >In the end it will reboot to command line interface
