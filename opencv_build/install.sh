@@ -21,6 +21,7 @@ echo "[INFO] Update system database"
 cd ~/opencv/opencv-$OPENCV_VERSION/build
 sudo make install
 sudo ldconfig
+make clean
 sudo apt update
 
 echo "[INFO] Remove temporary OpenCV folder"

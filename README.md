@@ -32,40 +32,36 @@ So.. Don´t worry, be happy!
   * [Background](#background)
   * [MIT License](#mit-license)
 - [Table of contents](#table-of-contents)
-- [Recomended requirements](#recomended-requirements)
+- [Recommended requirements](#recommended-requirements)
   * [Hardware](#hardware)
     + [My Raspberry Pi case](#my-raspberry-pi-case)
   * [Raspberry Pi software and O.S.](#raspberry-pi-software-and-os)
   * [Do I really need an extra computer?](#do-i-really-need-an-extra-computer-)
   * [Computer Software](#computer-software)
 - [O.S. Install + Basic Configuration](#os-install---basic-configuration)
-  * [Raspbian](#raspbian)
+  * [Raspberry Pi OS](#raspberry-pi-os)
   * [Enable Raspberry Pi Features](#enable-raspberry-pi-features)
 - [Severino Pi System Install](#severino-pi-system-install)
-  * [About Virtual Enviroment](#about-virtual-enviroment)
-    + [Install](#install)
-    + [Create](#create)
-    + [Activate](#activate)
-    + [Deactivate](#deactivate)
-    + [IMPORTANT](#important)
-  * [Install OpenCV and Dlib](#install-opencv-and-dlib)
-    + [Two commands installation](#two-commands-installation)
-    + [Testing OpenCV](#testing-opencv)
-    + [Testing DLIB](#testing-dlib)
+  * [Repository clone](#repository-clone)
+  * [Python Virtual Environment](#python-virtual-environment)
+  * [Install OpenCV, Dlib, Facial Recognition and other libraries](#install-opencv--dlib--facial-recognition-and-other-libraries)
+    + [OpenCV Build Easy!](#opencv-build-easy-)
 - [Equipment Build](#equipment-build)
   * [Hardware GPIO connection](#hardware-gpio-connection)
   * [Soft power button](#soft-power-button)
     + [Soft power button System Configuration](#soft-power-button-system-configuration)
     + [Soft power button usage](#soft-power-button-usage)
   * [FAN Cooling](#fan-cooling)
+  * [HDMI 7 inch LCD Display](#hdmi-7-inch-lcd-display)
 - [Using SeverinoPi System](#using-severinopi-system)
   * [User Management](#user-management)
 - [Raspberry Pi remote use tips](#raspberry-pi-remote-use-tips)
   * [Get Raspberry Pi IP Address](#get-raspberry-pi-ip-address)
-  * [Integrated Development Enviroment (IDE)](#integrated-development-enviroment--ide-)
+  * [Integrated Development Environment (IDE)](#integrated-development-environment--ide-)
   * [Recommended Terminal](#recommended-terminal)
   * [SSH Connection](#ssh-connection)
   * [Transfer Files](#transfer-files)
+- [OpenCV Build References](#opencv-build-references)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -166,7 +162,7 @@ Click on Interfaces and set Camera and SSH to Enabled. Click OK. You don’t nee
 ![SSH](readme_images/ssh.jpg)
 
 > *If the camera option is not available, use raspi-config command from terminal and enable the Legacy Camera inside Interfaces option  
-> *Read more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)
+> *Read more about SSH on Raspberry at [Magpi](https://magpi.raspberrypi.org/articles/ssh-remote-control-raspberry-pi)  
 
 # Severino Pi System Install
 From this step we are going to remote access the Raspberry Pi terminal.  
@@ -174,19 +170,18 @@ From this step we are going to remote access the Raspberry Pi terminal.
 
 ## Repository clone
 First, you will need to clone this repo to your Raspberry Pi.  
-Raspberry Pi OS Terminal:
+Raspberry Pi OS Terminal:  
 ```bash
 git clone https://github.com/alexandremendoncaalvaro/severinopi.git ~/severinopi
 ```
-
 ## Python Virtual Environment
-Create and activate the virtual environment at the project to install the python libraries.  
-> See the [About Virtual Environments](#about-virtual-environments) session
+We are not going to use virtual environments in this project.  
+If you stick to one version per python library, like this project, there is no need for a virtual environment.  
 
 ## Install OpenCV, Dlib, Facial Recognition and other libraries
 In most cases you can just install pre-compiled version of OpenCV and other required libraries using the command **pip install**.  
-But for this project I decided to make it optimized to Raspberry Pi... and to be fair I believe It's not be possible without this optimization.
-So we'll need to build at least OpenCV library for our Raspberry Pi ARM architecture.
+But for this project I decided to make it optimized to Raspberry Pi... and to be fair I believe It's not be possible without this optimization.  
+So we'll need to build at least OpenCV library for our Raspberry Pi ARM architecture.  
 
 ### OpenCV Build Easy!
 
@@ -342,38 +337,6 @@ After you are connected, you'll be in an empty window. You can always refer to t
 You can then open any folder or workspace on the remote machine using File > Open... or File > Open Workspace... just as you would locally!
 
 ![ssh-open-folder](https://code.visualstudio.com/assets/docs/remote/ssh/ssh-open-folder.png)  
-
-# About Virtual Environments
-
-We´re going to use Virtual Environments in this project.  
-This tool brings python package management to another level.  
-
-### Install
-```bash
-pip install virtualenv
-```
-### Create
-```bashs
-virtualenv virtualenv_name
-```
-### Activate
-```bash
-source virtualenv_name/bin/activate
-```
-### Deactivate
-```bash
-deactivate
-```
-
-### IMPORTANT
-
-EVERY TIME you open a new terminal to run a python file you will need to enable virtualenv resources at this terminal.  
-To enable an installed enviroment, navigate to the project folder and run:  
-
-```bash
-source virtualenv_name/bin/activate
-```
-Now you can install pip packages inside the virtual environment  
 
 # OpenCV Build References
 Main reference used for dependencies and build parameters:  
