@@ -28,7 +28,7 @@ So.. Don´t worry, be happy!
 
 # Table of contents
 
-- [Severino Pi (alpha version)](#severino-pi--alpha-version-)
+- [Severino Pi (alpha version)](#severino-pi-alpha-version)
   * [Background](#background)
   * [MIT License](#mit-license)
 - [Table of contents](#table-of-contents)
@@ -36,16 +36,18 @@ So.. Don´t worry, be happy!
   * [Hardware](#hardware)
     + [My Raspberry Pi case](#my-raspberry-pi-case)
   * [Raspberry Pi software and O.S.](#raspberry-pi-software-and-os)
-  * [Do I really need an extra computer?](#do-i-really-need-an-extra-computer-)
+  * [Do I really need an extra computer?](#do-i-really-need-an-extra-computer)
   * [Computer Software](#computer-software)
-- [O.S. Install + Basic Configuration](#os-install---basic-configuration)
+- [O.S. Install + Basic Configuration](#os-install-basic-configuration)
   * [Raspberry Pi OS](#raspberry-pi-os)
   * [Enable Raspberry Pi Features](#enable-raspberry-pi-features)
+- [Checking the PiCamera](#checking-the-picamera)
 - [Severino Pi System Install](#severino-pi-system-install)
   * [Repository clone](#repository-clone)
   * [Python Virtual Environment](#python-virtual-environment)
-  * [Install OpenCV, Dlib, Facial Recognition and other libraries](#install-opencv--dlib--facial-recognition-and-other-libraries)
-    + [OpenCV Build Easy!](#opencv-build-easy-)
+  * [Install OpenCV, Dlib, Facial Recognition and other libraries](#install-opencv-dlib-facial-recognition-and-other-libraries)
+    + [OpenCV Build Easy!](#opencv-build-easy)
+    + [Test OpenCV and Dlib](#test-opencv-and-dlib)
 - [Equipment Build](#equipment-build)
   * [Hardware GPIO connection](#hardware-gpio-connection)
   * [Soft power button](#soft-power-button)
@@ -57,13 +59,12 @@ So.. Don´t worry, be happy!
   * [User Management](#user-management)
 - [Raspberry Pi remote use tips](#raspberry-pi-remote-use-tips)
   * [Get Raspberry Pi IP Address](#get-raspberry-pi-ip-address)
-  * [Integrated Development Environment (IDE)](#integrated-development-environment--ide-)
+  * [Integrated Development Environment (IDE)](#integrated-development-environment-ide)
   * [Recommended Terminal](#recommended-terminal)
   * [SSH Connection](#ssh-connection)
   * [Transfer Files](#transfer-files)
+- [Test PiCamera with OpenCV remotely](#test-picamera-with-opencv-remotely)
 - [OpenCV Build References](#opencv-build-references)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Recommended requirements
 ## Hardware
