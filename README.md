@@ -367,6 +367,23 @@ When you finish the process to [install OpenCV, Dlib, Facial Recognition and oth
 ```
 > Press 'q' to exit
 
+## Test with C++
+The C++ samples are inside the folder **~/severinopi/cpp_samples**.  
+To compile C++ example use those commands:  
+```bash
+cd ~/severinopi/cpp_samples
+mkdir -p build
+cd build
+cmake ..
+cmake --build . --config Release
+```
+To execute, use this command:
+```bash
+~/severinopi/cpp_samples/build/picamera
+```
+
+> Press any key to exit
+
 # OpenCV Build References
 Main reference used for dependencies and build parameters:  
 https://qengineering.eu/install-opencv-lite-on-raspberry-pi.html  
